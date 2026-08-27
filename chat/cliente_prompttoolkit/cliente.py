@@ -6,7 +6,7 @@ from prompt_toolkit.patch_stdout import patch_stdout
 #local
 #HOST = "127.0.0.1"
 
-#outros dispositivos
+#outros dispositivos(ip da maquida que roda o servidor)
 #HOST = "..."
 PORTA = 5000
 
