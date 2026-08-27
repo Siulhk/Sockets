@@ -1,7 +1,11 @@
 import socket
 import threading
 
-HOST = "127.0.0.1"
+#local
+#HOST = "127.0.0.1"
+
+#Outros dispositivos
+#HOST = "0.0.0.0"
 PORTA = 5000
 
 clientes = {}
