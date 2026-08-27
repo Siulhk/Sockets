@@ -1,7 +1,11 @@
 import socket
 import threading
 
-HOST = "127.0.0.1"
+#local
+#HOST = "127.0.0.1"
+
+#outros dispositivos
+#HOST = "..."
 PORTA = 5000
 
 def receber_mensagens(cliente):

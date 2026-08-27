@@ -3,7 +3,11 @@ import threading
 from prompt_toolkit import PromptSession
 from prompt_toolkit.patch_stdout import patch_stdout
 
-HOST = "127.0.0.1"
+#local
+#HOST = "127.0.0.1"
+
+#outros dispositivos
+#HOST = "..."
 PORTA = 5000
 
 def receber_mensagens(cliente):
