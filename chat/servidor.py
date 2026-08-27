@@ -7,7 +7,6 @@ PORTA = 5000
 clientes = {}
 lock = threading.Lock()
 
-
 def transmitir(mensagem, cliente_origem=None):
     with lock:
         for cliente in clientes:
@@ -17,7 +16,6 @@ def transmitir(mensagem, cliente_origem=None):
                 except:
                     pass
 
-
 def listar_usuarios():
     with lock:
         if not clientes:
@@ -26,7 +24,6 @@ def listar_usuarios():
         nomes = "\n".join(f"- {nome}" for nome in clientes.values())
 
         return f"[Servidor] Usuários conectados:\n{nomes}"
-
 
 def atender_cliente(cliente, endereco):
     nome = None
@@ -102,7 +99,6 @@ def atender_cliente(cliente, endereco):
 
         cliente.close()
 
-
 servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 servidor.bind((HOST, PORTA))
@@ -118,5 +114,4 @@ while True:
         target=atender_cliente,
         args=(cliente, endereco)
     )
-
     thread.start()

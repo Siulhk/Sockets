@@ -1,13 +1,10 @@
 import socket
 import threading
-
 from prompt_toolkit import PromptSession
 from prompt_toolkit.patch_stdout import patch_stdout
 
-
 HOST = "127.0.0.1"
 PORTA = 5000
-
 
 def receber_mensagens(cliente):
     while True:
@@ -27,13 +24,10 @@ def receber_mensagens(cliente):
         except OSError:
             break
 
-
 cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 cliente.connect((HOST, PORTA))
 
-
-# Recebe a solicitação de nome do servidor
 mensagem = cliente.recv(1024).decode()
 
 print(mensagem)
@@ -42,8 +36,6 @@ nome = input("Nome: ")
 
 cliente.send(nome.encode())
 
-
-# Thread responsável por receber mensagens
 thread_receber = threading.Thread(
     target=receber_mensagens,
     args=(cliente,)
@@ -52,15 +44,12 @@ thread_receber = threading.Thread(
 thread_receber.daemon = True
 thread_receber.start()
 
-
 print()
 print("Você está conectado ao chat.")
 print("Digite /help para ver os comandos.")
 print()
 
-
 session = PromptSession()
-
 
 with patch_stdout():
     while True:
@@ -78,7 +67,6 @@ with patch_stdout():
 
         except (KeyboardInterrupt, EOFError):
             break
-
 
 cliente.close()
 
