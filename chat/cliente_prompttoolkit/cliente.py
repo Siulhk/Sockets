@@ -10,24 +10,6 @@ from prompt_toolkit.patch_stdout import patch_stdout
 #HOST = "..."
 PORTA = 5000
 
-def receber_mensagens(cliente):
-    while True:
-        try:
-            dados = cliente.recv(1024)
-
-            if not dados:
-                break
-
-            mensagem = dados.decode()
-
-            print(mensagem)
-
-        except ConnectionResetError:
-            break
-
-        except OSError:
-            break
-
 cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 cliente.connect((HOST, PORTA))
@@ -75,3 +57,21 @@ with patch_stdout():
 cliente.close()
 
 print("Conexão encerrada.")
+
+def receber_mensagens(cliente):
+    while True:
+        try:
+            dados = cliente.recv(1024)
+
+            if not dados:
+                break
+
+            mensagem = dados.decode()
+
+            print(mensagem)
+
+        except ConnectionResetError:
+            break
+
+        except OSError:
+            break

@@ -11,6 +11,23 @@ PORTA = 5000
 clientes = {}
 lock = threading.Lock()
 
+servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+servidor.bind((HOST, PORTA))
+
+servidor.listen()
+
+print(f"Servidor aguardando conexões em {HOST}:{PORTA}...")
+
+while True:
+    cliente, endereco = servidor.accept()
+
+    thread = threading.Thread(
+        target=atender_cliente,
+        args=(cliente, endereco)
+    )
+    thread.start()   
+    
 def transmitir(mensagem, cliente_origem=None):
     with lock:
         for cliente in clientes:
@@ -102,20 +119,3 @@ def atender_cliente(cliente, endereco):
             print(f"{nome} saiu do chat.")
 
         cliente.close()
-
-servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-servidor.bind((HOST, PORTA))
-
-servidor.listen()
-
-print(f"Servidor aguardando conexões em {HOST}:{PORTA}...")
-
-while True:
-    cliente, endereco = servidor.accept()
-
-    thread = threading.Thread(
-        target=atender_cliente,
-        args=(cliente, endereco)
-    )
-    thread.start()

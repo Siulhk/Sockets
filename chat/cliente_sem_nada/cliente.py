@@ -8,24 +8,7 @@ import threading
 #HOST = "..."
 PORTA = 5000
 
-def receber_mensagens(cliente):
-    while True:
-        try:
-            dados = cliente.recv(1024)
 
-            if not dados:
-                break
-
-            mensagem = dados.decode()
-
-            print(f"\n{mensagem}")
-            print("Você: ", end="", flush=True)
-
-        except ConnectionResetError:
-            break
-
-        except:
-            break
 
 cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -63,3 +46,22 @@ while True:
 cliente.close()
 
 print("Conexão encerrada.")
+
+def receber_mensagens(cliente):
+    while True:
+        try:
+            dados = cliente.recv(1024)
+
+            if not dados:
+                break
+
+            mensagem = dados.decode()
+
+            print(f"\n{mensagem}")
+            print("Você: ", end="", flush=True)
+
+        except ConnectionResetError:
+            break
+
+        except:
+            break
